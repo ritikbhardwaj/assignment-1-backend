@@ -1,15 +1,7 @@
 /**
- * Gets rid of the '-' from a uuidv4 type id and
- * return a 32 characters long id.
+ * Generates a random 32 bit - 8 characters hex string.
+ * 32 bit = 2^32 unique values
  */
-const { v4: uuidv4 } = require('uuid');
+const crypto = require("crypto").
 
-module.exports = () => {
-  let userId = '';
-  uuidv4()
-    .split('-')
-    .forEach((seg) => {
-      userId += seg;
-    });
-  return userId;
-};
+module.exports = () => crypto.randomBytes(8).toString("hex");
