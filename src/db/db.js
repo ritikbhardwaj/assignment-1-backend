@@ -2,9 +2,11 @@ require('dotenv').config();
 const { Pool } = require('pg');
 const { config } = require('../config/config');
 
-const { MODE } = process.env;
+const { NODE_ENV, MODE } = process.env;
 
-const pool = new Pool(MODE === 'dev' ? config.dev : config.prod);
+const mode = NODE_ENV || MODE;
+
+const pool = new Pool(mode === 'dev' ? config.dev : config.prod);
 
 module.exports = {
   query: (text, params, callback) => {
